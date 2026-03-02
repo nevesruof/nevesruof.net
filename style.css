@@ -1594,6 +1594,17 @@ body {
     font-style: italic;
 }
 
+/* ── Custom Text Selection ──────────────────────────────── */
+.millaray-content ::selection {
+    background: rgba(249, 168, 212, 0.25);
+    color: #ffffff;
+}
+
+.millaray-content ::-moz-selection {
+    background: rgba(249, 168, 212, 0.25);
+    color: #ffffff;
+}
+
 .millaray-overlay.ml-open .millaray-content {
     opacity: 1;
 }
