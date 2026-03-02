@@ -360,13 +360,22 @@ document.addEventListener('DOMContentLoaded', () => {
         animate();
     }
 
-    // ── Close overlay ─────────────────────────────────────
+    // ── Close overlay (curtain rises = slides back over, then hides) ───
     function closeMillaray() {
-        overlay.classList.remove('ml-open');
-        overlay.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-        running = false;
-        cancelAnimationFrame(raf);
+        if (overlay.classList.contains('ml-closing')) return; // guard double-click
+
+        // 1. Fade content out & slide curtain back over it
+        overlay.classList.add('ml-closing');
+
+        // 2. After curtain fully covers (0.72s), hide everything cleanly
+        setTimeout(() => {
+            overlay.classList.remove('ml-open');
+            overlay.classList.remove('ml-closing');
+            overlay.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            running = false;
+            cancelAnimationFrame(raf);
+        }, 740);
     }
 
     btn.addEventListener('click', openMillaray);

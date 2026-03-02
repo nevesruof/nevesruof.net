@@ -1547,6 +1547,17 @@ body {
     transform: translateY(0);
 }
 
+/* On close: curtain slides back DOWN first, then JS removes ml-open */
+.millaray-overlay.ml-closing .millaray-curtain {
+    transform: translateY(0);
+    transition: transform 0.72s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.millaray-overlay.ml-closing .millaray-content {
+    opacity: 0;
+    transition: opacity 0.18s ease;
+}
+
 /* ── Actual content fades in after curtain lands ─────────── */
 .millaray-content {
     position: absolute;
