@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (cmd === '/ac') {
                 const res = document.createElement('div');
                 res.className = 'pc-line';
-                res.innerHTML = `<span class="lp">LLC</span><span class="li">|</span><span class="lx">The best Skid of Grim: </span><a class="log-link" href="https://discord.gg/vDVjJN79D5" target="_blank" rel="noopener">https://discord.gg/vDVjJN79D5</a><span class="lx"> ($ Rize Skidder)</span>`;
+                res.innerHTML = `<span class="lp">LLC</span><span class="li">|</span><span class="lx">Best AC; </span><a class="log-link" href="https://discord.gg/vDVjJN79D5" target="_blank" rel="noopener">https://discord.gg/vDVjJN79D5</a><span class="lx"> ($ Rize )</span>`;
                 pcBody.appendChild(res);
 
             } else if (cmd.toLowerCase() === '/millaray') {
@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 const res = document.createElement('div');
                 res.className = 'pc-line';
-                res.innerHTML = `<span class="lp">LLC</span><span class="li">|</span><span class="lx">Unknown command. Try </span><span class="le">/ac</span>`;
+                res.innerHTML = `<span class="lp">LLC</span><span class="li">|</span><span class="lx">Unknown command. Try </span><span class="le">/ for suggestions.</span>`;
                 pcBody.appendChild(res);
             }
 
@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="millaray-toast-icon">💖</div>
                 <div class="millaray-toast-body">
                     <div class="millaray-toast-title">Para Millaray 🌸</div>
-                    <div class="millaray-toast-msg">Te amo Millaray, perdóname por ser una mierda contigo.</div>
+                    <div class="millaray-toast-msg">Te amo Millaray, perdóname por ser una mierda contigo, te juro que no queria hacerte daño.</div>
                 </div>
                 <button class="millaray-toast-close" onclick="this.parentElement.remove()">✕</button>
             `;
