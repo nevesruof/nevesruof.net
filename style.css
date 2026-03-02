@@ -1344,3 +1344,124 @@ body {
         display: none;
     }
 }
+
+/* ══════════════════════════════════════════════════════════
+   /Millaray TOAST NOTIFICATION
+   ══════════════════════════════════════════════════════════ */
+
+@keyframes millaray-slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes millaray-slide-out {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-16px) scale(0.96);
+    }
+}
+
+#millaray-toast {
+    position: fixed;
+    top: 88px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    max-width: 340px;
+    width: 100%;
+    padding: 16px 14px 16px 16px;
+    background: rgba(12, 8, 12, 0.92);
+    border: 1px solid rgba(255, 105, 180, 0.3);
+    border-radius: 14px;
+    box-shadow:
+        0 0 0 0.5px rgba(255, 105, 180, 0.15),
+        0 16px 48px rgba(0, 0, 0, 0.8),
+        0 0 30px rgba(255, 105, 180, 0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    animation: millaray-slide-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+#millaray-toast.millaray-toast-hide {
+    animation: millaray-slide-out 0.45s cubic-bezier(0.55, 0, 1, 0.45) both;
+}
+
+.millaray-toast-icon {
+    font-size: 1.6rem;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+    filter: drop-shadow(0 0 8px rgba(255, 105, 180, 0.6));
+    animation: heartbeat 1.4s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(1.18);
+    }
+
+    60% {
+        transform: scale(1.06);
+    }
+}
+
+.millaray-toast-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.millaray-toast-title {
+    font-family: var(--font-heading);
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #ffb6d9;
+    letter-spacing: 0.2px;
+    margin-bottom: 5px;
+    text-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
+}
+
+.millaray-toast-msg {
+    font-family: var(--font-primary);
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.72);
+    line-height: 1.5;
+    word-break: break-word;
+    white-space: normal;
+}
+
+.millaray-toast-close {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0 2px;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: color 0.2s;
+    margin-top: 1px;
+}
+
+.millaray-toast-close:hover {
+    color: rgba(255, 182, 217, 0.8);
+}

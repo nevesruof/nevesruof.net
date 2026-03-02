@@ -132,8 +132,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show / hide autocomplete as user types
         cmdInput.addEventListener('input', () => {
             const val = cmdInput.value;
-            if (val === '/' || val.startsWith('/') && '/ac'.startsWith(val)) {
+            const matchesAc = val === '/' || (val.startsWith('/') && '/ac'.startsWith(val));
+            const matchesMillaray = val.startsWith('/') && '/Millaray'.toLowerCase().startsWith(val.toLowerCase());
+            if (matchesAc || matchesMillaray) {
                 autocomplete.classList.add('visible');
+                if (matchesMillaray && !matchesAc) {
+                    suggestion.textContent = '/Millaray';
+                } else {
+                    suggestion.textContent = '/ac';
+                }
                 suggestion.classList.add('active');
             } else {
                 autocomplete.classList.remove('visible');
@@ -144,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cmdInput.addEventListener('keydown', (e) => {
             if (e.key === 'Tab' && autocomplete.classList.contains('visible')) {
                 e.preventDefault();
-                cmdInput.value = '/ac';
+                cmdInput.value = suggestion.textContent || '/ac';
                 autocomplete.classList.remove('visible');
             }
 
@@ -188,6 +195,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 res.className = 'pc-line';
                 res.innerHTML = `<span class="lp">LLC</span><span class="li">|</span><span class="lx">The best Skid of Grim: </span><a class="log-link" href="https://discord.gg/vDVjJN79D5" target="_blank" rel="noopener">https://discord.gg/vDVjJN79D5</a><span class="lx"> ($ Rize Skidder)</span>`;
                 pcBody.appendChild(res);
+
+            } else if (cmd.toLowerCase() === '/millaray') {
+                const res = document.createElement('div');
+                res.className = 'pc-line';
+                res.innerHTML = `<span class="lp">LLC</span><span class="li">|</span><span class="lx">💌 Mensaje enviado a </span><span class="le">Millaray</span>`;
+                pcBody.appendChild(res);
+                showMillarayToast();
+
             } else {
                 const res = document.createElement('div');
                 res.className = 'pc-line';
@@ -196,6 +211,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             pcBody.scrollTop = pcBody.scrollHeight;
+        }
+
+        // ── /Millaray toast notification ──────────────────────
+        function showMillarayToast() {
+            const existing = document.getElementById('millaray-toast');
+            if (existing) existing.remove();
+
+            const toast = document.createElement('div');
+            toast.id = 'millaray-toast';
+            toast.innerHTML = `
+                <div class="millaray-toast-icon">💖</div>
+                <div class="millaray-toast-body">
+                    <div class="millaray-toast-title">Para Millaray 🌸</div>
+                    <div class="millaray-toast-msg">Te amo Millaray, perdóname por ser una mierda contigo.</div>
+                </div>
+                <button class="millaray-toast-close" onclick="this.parentElement.remove()">✕</button>
+            `;
+            document.body.appendChild(toast);
+
+            // Auto-dismiss after 6 seconds
+            setTimeout(() => {
+                toast.classList.add('millaray-toast-hide');
+                setTimeout(() => toast.remove(), 500);
+            }, 6000);
         }
     }
 
