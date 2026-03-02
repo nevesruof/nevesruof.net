@@ -125,23 +125,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const cmdInput = document.getElementById('pcCommandInput');
     const autocomplete = document.getElementById('pcAutocomplete');
     const suggestion = document.getElementById('pcSuggestion');
+    const suggestionMillaray = document.getElementById('pcSuggestionMillaray');
     const pcWrap = document.querySelector('.pc-wrap');
 
     if (cmdInput && pcBody) {
 
-        // Show / hide autocomplete as user types
+        // Commands list
+        const commands = [
+            { id: 'pcSuggestion', cmd: '/ac', el: suggestion },
+            { id: 'pcSuggestionMillaray', cmd: '/Millaray', el: suggestionMillaray },
+        ];
+
+        // Show / hide each suggestion individually as user types
         cmdInput.addEventListener('input', () => {
             const val = cmdInput.value;
-            const matchesAc = val === '/' || (val.startsWith('/') && '/ac'.startsWith(val));
-            const matchesMillaray = val.startsWith('/') && '/Millaray'.toLowerCase().startsWith(val.toLowerCase());
-            if (matchesAc || matchesMillaray) {
-                autocomplete.classList.add('visible');
-                if (matchesMillaray && !matchesAc) {
-                    suggestion.textContent = '/Millaray';
-                } else {
-                    suggestion.textContent = '/ac';
+            let anyVisible = false;
+            commands.forEach(c => {
+                const matches = val === '/' || (val.startsWith('/') && c.cmd.toLowerCase().startsWith(val.toLowerCase()));
+                if (c.el) {
+                    c.el.style.display = matches ? '' : 'none';
+                    if (matches) anyVisible = true;
                 }
-                suggestion.classList.add('active');
+            });
+            if (anyVisible) {
+                autocomplete.classList.add('visible');
             } else {
                 autocomplete.classList.remove('visible');
             }
@@ -151,7 +158,9 @@ document.addEventListener('DOMContentLoaded', () => {
         cmdInput.addEventListener('keydown', (e) => {
             if (e.key === 'Tab' && autocomplete.classList.contains('visible')) {
                 e.preventDefault();
-                cmdInput.value = suggestion.textContent || '/ac';
+                // Fill with the first visible suggestion
+                const firstVisible = commands.find(c => c.el && c.el.style.display !== 'none');
+                if (firstVisible) cmdInput.value = firstVisible.cmd;
                 autocomplete.classList.remove('visible');
             }
 
@@ -167,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Click on suggestion
+        // Click on /ac suggestion
         suggestion.addEventListener('click', () => {
             cmdInput.value = '/ac';
             autocomplete.classList.remove('visible');
@@ -175,6 +184,17 @@ document.addEventListener('DOMContentLoaded', () => {
             runCommand('/ac');
             cmdInput.value = '';
         });
+
+        // Click on /Millaray suggestion
+        if (suggestionMillaray) {
+            suggestionMillaray.addEventListener('click', () => {
+                cmdInput.value = '/Millaray';
+                autocomplete.classList.remove('visible');
+                cmdInput.focus();
+                runCommand('/Millaray');
+                cmdInput.value = '';
+            });
+        }
 
         // Click anywhere in the console → focus input
         if (pcWrap) pcWrap.addEventListener('click', () => cmdInput.focus());
@@ -199,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (cmd.toLowerCase() === '/millaray') {
                 const res = document.createElement('div');
                 res.className = 'pc-line';
-                res.innerHTML = `<span class="lp">LLC</span><span class="li">|</span><span class="lx">💌 Mensaje enviado a </span><span class="le">Millaray</span>`;
+                res.innerHTML = `<span class="lp">LLC</span><span class="li">|</span><span class="lx"> Para </span><span class="le">Millaray</span>`;
                 pcBody.appendChild(res);
                 showMillarayToast();
 
