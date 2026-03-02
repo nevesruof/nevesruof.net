@@ -358,6 +358,12 @@ document.addEventListener('DOMContentLoaded', () => {
         running = true;
         petals = [];
         animate();
+
+        // Auto-play music if player is ready
+        if (window.mlPlayer && typeof window.mlPlayer.playVideo === 'function') {
+            window.mlPlayer.playVideo();
+            updatePlayBtn(true);
+        }
     }
 
     // ── Close overlay (curtain rises = slides back over, then hides) ───
@@ -366,6 +372,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 1. Fade content out & slide curtain back over it
         overlay.classList.add('ml-closing');
+
+        // Pause music
+        if (window.mlPlayer && typeof window.mlPlayer.pauseVideo === 'function') {
+            window.mlPlayer.pauseVideo();
+            updatePlayBtn(false);
+        }
 
         // 2. After curtain fully covers (0.72s), hide everything cleanly
         setTimeout(() => {
@@ -388,6 +400,85 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Resize canvas when window changes
     window.addEventListener('resize', () => { if (running) resizeCanvas(); });
+
+
+    /* ── YouTube IFrame Music Player Setup ───────────────── */
+    const playPauseBtn = document.getElementById('mlPlayPauseBtn');
+    const iconPlay = document.getElementById('mlIconPlay');
+    const iconPause = document.getElementById('mlIconPause');
+    const volSlider = document.getElementById('mlVolumeSlider');
+    let isPlaying = false;
+
+    function updatePlayBtn(playing) {
+        isPlaying = playing;
+        if (playing) {
+            iconPlay.style.display = 'none';
+            iconPause.style.display = 'block';
+        } else {
+            iconPlay.style.display = 'block';
+            iconPause.style.display = 'none';
+        }
+    }
+
+    // Load YT API script
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    window.onYouTubeIframeAPIReady = function () {
+        window.mlPlayer = new YT.Player('mlYTPlayer', {
+            height: '1',
+            width: '1',
+            videoId: 'KE-5mWFEsEY', // Unknown Feelings - Novulent
+            playerVars: {
+                'autoplay': 0,
+                'controls': 0,
+                'disablekb': 1,
+                'fs': 0,
+                'rel': 0,
+                'showinfo': 0,
+                'iv_load_policy': 3
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    };
+
+    function onPlayerReady(event) {
+        // Set initial volume based on slider
+        event.target.setVolume(parseInt(volSlider.value, 10));
+    }
+
+    function onPlayerStateChange(event) {
+        if (event.data === YT.PlayerState.PLAYING) {
+            updatePlayBtn(true);
+        } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+            updatePlayBtn(false);
+        }
+    }
+
+    // Music widget controls
+    if (playPauseBtn && volSlider) {
+        playPauseBtn.addEventListener('click', () => {
+            if (!window.mlPlayer || typeof window.mlPlayer.getPlayerState !== 'function') return;
+            const state = window.mlPlayer.getPlayerState();
+            if (state === YT.PlayerState.PLAYING) {
+                window.mlPlayer.pauseVideo();
+            } else {
+                window.mlPlayer.playVideo();
+            }
+        });
+
+        volSlider.addEventListener('input', (e) => {
+            if (window.mlPlayer && typeof window.mlPlayer.setVolume === 'function') {
+                window.mlPlayer.setVolume(parseInt(e.target.value, 10));
+            }
+        });
+    }
+
 })();
 
 

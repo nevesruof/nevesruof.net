@@ -84,6 +84,44 @@
                 </p>
             </div>
 
+            <!-- ── Music Player Notification ── -->
+            <div id="mlYTPlayer"
+                style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;left:-9999px;"></div>
+
+            <div class="ml-music-player" id="mlMusicPlayer">
+                <div class="ml-music-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M9 18V5l12-2v13" />
+                        <circle cx="6" cy="18" r="3" />
+                        <circle cx="18" cy="16" r="3" />
+                    </svg>
+                </div>
+                <div class="ml-music-info">
+                    <span class="ml-music-title">unknown feelings</span>
+                    <span class="ml-music-artist">Novulent</span>
+                </div>
+                <div class="ml-music-controls">
+                    <button class="ml-music-btn" id="mlPlayPauseBtn" aria-label="Play/Pause">
+                        <svg id="mlIconPause" viewBox="0 0 24 24" fill="currentColor">
+                            <rect x="6" y="4" width="4" height="16" rx="1" />
+                            <rect x="14" y="4" width="4" height="16" rx="1" />
+                        </svg>
+                        <svg id="mlIconPlay" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+                            <polygon points="5,3 19,12 5,21" />
+                        </svg>
+                    </button>
+                    <div class="ml-volume-wrap">
+                        <svg class="ml-vol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                        </svg>
+                        <input type="range" class="ml-volume-slider" id="mlVolumeSlider" min="0" max="100" value="60">
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
