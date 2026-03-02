@@ -206,20 +206,20 @@ document.addEventListener('DOMContentLoaded', () => {
             // Echo what user typed
             const echo = document.createElement('div');
             echo.className = 'pc-line';
-            echo.innerHTML = `<span class="lp">LLC</span><span class="la">&gt;</span><span class="lu">you</span><span class="lx"> ${cmd}</span>`;
+            echo.innerHTML = `<span class="lp">LLC</span><span class="la">&gt;</span><span class="lu">You</span><span class="lx"> ${cmd}</span>`;
             pcBody.appendChild(echo);
 
             // Command responses
             if (cmd === '/ac') {
                 const res = document.createElement('div');
                 res.className = 'pc-line';
-                res.innerHTML = `<span class="lp">LLC</span><span class="li">|</span><span class="lx">Best AC; </span><a class="log-link" href="https://discord.gg/vDVjJN79D5" target="_blank" rel="noopener">https://discord.gg/vDVjJN79D5</a><span class="lx"> ($ Rize )</span>`;
+                res.innerHTML = `<span class="lp">LLC</span><span class="li">|</span><span class="lx">Best AC; </span><a class="log-link" href="https://discord.gg/vDVjJN79D5" target="_blank" rel="noopener">https://discord.gg/vDVjJN79D5</a><span class="lx"> ( $ Rize )</span>`;
                 pcBody.appendChild(res);
 
             } else if (cmd.toLowerCase() === '/millaray') {
                 const res = document.createElement('div');
                 res.className = 'pc-line';
-                res.innerHTML = `<span class="lp">LLC</span><span class="li">|</span><span class="lx"> Para </span><span class="le">Millaray</span>`;
+                res.innerHTML = `<span class="lp">LLC</span><span class="li">|</span><span class="lx"> Eres un </span><span class="le">ESTUPIDO</span>`;
                 pcBody.appendChild(res);
                 showMillarayToast();
 
@@ -259,6 +259,128 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
+
+/* ══════════════════════════════════════════════════════════
+   MILLARAY OVERLAY — Curtain + Flower Particle System
+   ══════════════════════════════════════════════════════════ */
+(function () {
+    const btn = document.getElementById('navMillarayBtn');
+    const overlay = document.getElementById('millarayOverlay');
+    const closeBtn = document.getElementById('millarayClose');
+    const canvas = document.getElementById('millarayFlowers');
+    if (!btn || !overlay || !canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let raf, petals = [], running = false;
+
+    // ── Resize canvas to match viewport ──────────────────
+    function resizeCanvas() {
+        canvas.width = overlay.clientWidth;
+        canvas.height = overlay.clientHeight;
+    }
+
+    // ── Petal factory ─────────────────────────────────────
+    const PETAL_COLORS = [
+        'rgba(249,168,212,',  // soft pink
+        'rgba(253,200,224,',  // pale pink
+        'rgba(255,255,255,',  // white
+        'rgba(187,247,208,',  // light mint
+        'rgba(216,252,199,',  // soft green
+    ];
+
+    function createPetal() {
+        const color = PETAL_COLORS[Math.floor(Math.random() * PETAL_COLORS.length)];
+        return {
+            x: Math.random() * canvas.width,
+            y: -20,
+            size: Math.random() * 8 + 5,          // 5-13px
+            opacity: Math.random() * 0.55 + 0.25,    // 0.25-0.8
+            speed: Math.random() * 1.2 + 0.5,      // gentle fall
+            drift: (Math.random() - 0.5) * 0.8,    // gentle sway
+            rot: Math.random() * Math.PI * 2,
+            rotV: (Math.random() - 0.5) * 0.04,
+            color,
+        };
+    }
+
+    // ── Draw one petal as a simple 4-petal flower ─────────
+    function drawPetal(p) {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.globalAlpha = p.opacity;
+        ctx.fillStyle = p.color + '1)';
+
+        // Four petals using ellipses
+        for (let i = 0; i < 4; i++) {
+            ctx.save();
+            ctx.rotate((Math.PI / 2) * i);
+            ctx.beginPath();
+            ctx.ellipse(0, -p.size * 0.6, p.size * 0.35, p.size * 0.6, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+        // Tiny center dot
+        ctx.fillStyle = 'rgba(255,240,200,0.8)';
+        ctx.beginPath();
+        ctx.arc(0, 0, p.size * 0.18, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+    }
+
+    // ── Animation loop ────────────────────────────────────
+    function animate() {
+        if (!running) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Maintain ~28 petals on screen
+        while (petals.length < 28) petals.push(createPetal());
+
+        petals.forEach((p, i) => {
+            p.y += p.speed;
+            p.x += p.drift + Math.sin(p.y * 0.02) * 0.4;
+            p.rot += p.rotV;
+            drawPetal(p);
+            // Remove when off-screen
+            if (p.y > canvas.height + 20) petals.splice(i, 1);
+        });
+
+        raf = requestAnimationFrame(animate);
+    }
+
+    // ── Open overlay ──────────────────────────────────────
+    function openMillaray() {
+        resizeCanvas();
+        overlay.classList.add('ml-open');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        running = true;
+        petals = [];
+        animate();
+    }
+
+    // ── Close overlay ─────────────────────────────────────
+    function closeMillaray() {
+        overlay.classList.remove('ml-open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        running = false;
+        cancelAnimationFrame(raf);
+    }
+
+    btn.addEventListener('click', openMillaray);
+    closeBtn.addEventListener('click', closeMillaray);
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.classList.contains('ml-open')) closeMillaray();
+    });
+
+    // Resize canvas when window changes
+    window.addEventListener('resize', () => { if (running) resizeCanvas(); });
+})();
+
 
 /* ══════════════════════════════════════════════════════════
    PARTICLE RAIN SYSTEM (Background Matrix effect)

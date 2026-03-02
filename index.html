@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>$ Nevesruof | Advanced ScreenShare Bypass</title>
+    <link rel="icon" href="img/logo.png" sizes="any">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Usando Inter para tecnología SaaS fina y Space Grotesk/Playfair para acentos -->
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@1,500&family=Space+Grotesk:wght@300;400;500;700&display=swap"
         rel="stylesheet">
@@ -39,8 +39,45 @@
                 <a href="#features" class="nav-link">Knowledge</a>
             </nav>
 
+            <!-- Right: Millaray special button -->
+            <button class="nav-millaray-btn" id="navMillarayBtn" aria-label="Open Millaray section">
+                Millaray
+                <span class="nav-millaray-cherry">🌸</span>
+            </button>
+
         </div>
     </header>
+
+    <!-- ═══════════ MILLARAY FULL-SCREEN OVERLAY ═══════════ -->
+    <div class="millaray-overlay" id="millarayOverlay" aria-hidden="true">
+        <!-- Curtain layer -->
+        <div class="millaray-curtain" id="millarayCurtain"></div>
+
+        <!-- Content -->
+        <div class="millaray-content" id="millarayContent">
+
+            <!-- Close button -->
+            <button class="millaray-close" id="millarayClose" aria-label="Cerrar">&times;</button>
+
+            <!-- Flower particles canvas -->
+            <canvas class="millaray-flowers" id="millarayFlowers"></canvas>
+
+            <!-- Glow orbs background -->
+            <div class="ml-glow ml-glow-1"></div>
+            <div class="ml-glow ml-glow-2"></div>
+            <div class="ml-glow ml-glow-3"></div>
+
+            <!-- Text -->
+            <div class="millaray-center">
+                <h1 class="millaray-title">
+                    <span class="ml-white">Te amo,</span><br>
+                    <span class="ml-pink">Millaray</span>
+                </h1>
+                <p class="millaray-sub">Te quiero decir:</p>
+            </div>
+
+        </div>
+    </div>
 
     <!-- Hero Estructurado -->
     <section class="master-hero">
