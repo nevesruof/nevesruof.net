@@ -249,6 +249,58 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ══════════════════════════════════════════════════════════
+   MOBILE NAV — Hamburger toggle
+   ══════════════════════════════════════════════════════════ */
+(function () {
+    const hamburger = document.getElementById('navHamburger');
+    const mobileMenu = document.getElementById('navMobileMenu');
+    const mobileMillarayBtn = document.getElementById('navMillarayBtnMobile');
+
+    if (!hamburger || !mobileMenu) return;
+
+    function toggleMenu() {
+        const isOpen = mobileMenu.classList.toggle('is-open');
+        hamburger.classList.toggle('is-open', isOpen);
+        mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+    }
+
+    function closeMenu() {
+        mobileMenu.classList.remove('is-open');
+        hamburger.classList.remove('is-open');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+    }
+
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu();
+    });
+
+    // Close when clicking any nav link
+    mobileMenu.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+        if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+            closeMenu();
+        }
+    });
+
+    // Close on scroll
+    window.addEventListener('scroll', closeMenu, { passive: true });
+
+    // Wire up the mobile Millaray button to open the overlay
+    if (mobileMillarayBtn) {
+        mobileMillarayBtn.addEventListener('click', () => {
+            closeMenu();
+            const mainBtn = document.getElementById('navMillarayBtn');
+            if (mainBtn) mainBtn.click();
+        });
+    }
+})();
+
+/* ══════════════════════════════════════════════════════════
    MILLARAY OVERLAY — Curtain + Flower Particle System
    ══════════════════════════════════════════════════════════ */
 (function () {
