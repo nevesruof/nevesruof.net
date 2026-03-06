@@ -132,8 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Commands list
         const commands = [
-            { id: 'pcSuggestion', cmd: '/ac', el: suggestion },
-            { id: 'pcSuggestionMillaray', cmd: '/Millaray', el: suggestionMillaray },
+            { id: 'pcSuggestion', cmd: '/ac', el: suggestion }
         ];
 
         // Show / hide each suggestion individually as user types
@@ -184,17 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
             runCommand('/ac');
             cmdInput.value = '';
         });
-
-        // Click on /Millaray suggestion
-        if (suggestionMillaray) {
-            suggestionMillaray.addEventListener('click', () => {
-                cmdInput.value = '/Millaray';
-                autocomplete.classList.remove('visible');
-                cmdInput.focus();
-                runCommand('/Millaray');
-                cmdInput.value = '';
-            });
-        }
 
         // Click anywhere in the console → focus input
         if (pcWrap) pcWrap.addEventListener('click', () => cmdInput.focus());
