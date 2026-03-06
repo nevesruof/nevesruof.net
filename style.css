@@ -1384,13 +1384,13 @@ body {
     max-width: 340px;
     width: 100%;
     padding: 16px 14px 16px 16px;
-    background: rgba(12, 8, 12, 0.92);
-    border: 1px solid rgba(255, 105, 180, 0.3);
+    background: rgba(8, 12, 18, 0.92);
+    border: 1px solid rgba(100, 180, 255, 0.3);
     border-radius: 14px;
     box-shadow:
-        0 0 0 0.5px rgba(255, 105, 180, 0.15),
+        0 0 0 0.5px rgba(100, 180, 255, 0.15),
         0 16px 48px rgba(0, 0, 0, 0.8),
-        0 0 30px rgba(255, 105, 180, 0.12);
+        0 0 30px rgba(100, 180, 255, 0.12);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     animation: millaray-slide-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -1405,7 +1405,7 @@ body {
     line-height: 1;
     flex-shrink: 0;
     margin-top: 2px;
-    filter: drop-shadow(0 0 8px rgba(255, 105, 180, 0.6));
+    filter: drop-shadow(0 0 8px rgba(100, 180, 255, 0.6));
     animation: heartbeat 1.4s ease-in-out infinite;
 }
 
@@ -1434,10 +1434,10 @@ body {
     font-family: var(--font-heading);
     font-size: 0.88rem;
     font-weight: 700;
-    color: #ffb6d9;
+    color: #b6d9ff;
     letter-spacing: 0.2px;
     margin-bottom: 5px;
-    text-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
+    text-shadow: 0 0 10px rgba(100, 180, 255, 0.4);
 }
 
 .millaray-toast-msg {
@@ -1463,7 +1463,7 @@ body {
 }
 
 .millaray-toast-close:hover {
-    color: rgba(255, 182, 217, 0.8);
+    color: rgba(135, 206, 250, 0.8);
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -1475,10 +1475,10 @@ body {
     align-items: center;
     gap: 0.45rem;
     padding: 0.38rem 1rem 0.38rem 0.85rem;
-    background: rgba(255, 182, 213, 0.06);
-    border: 1px solid rgba(255, 182, 213, 0.22);
+    background: rgba(135, 206, 235, 0.06);
+    border: 1px solid rgba(135, 206, 235, 0.22);
     border-radius: 999px;
-    color: rgba(255, 200, 225, 0.85);
+    color: rgba(180, 225, 255, 0.85);
     font-family: var(--font-primary);
     font-size: 0.82rem;
     font-weight: 500;
@@ -1490,10 +1490,10 @@ body {
 }
 
 .nav-millaray-btn:hover {
-    background: rgba(255, 182, 213, 0.14);
-    border-color: rgba(255, 182, 213, 0.5);
-    color: #ffb6d9;
-    box-shadow: 0 0 18px rgba(255, 140, 190, 0.18);
+    background: rgba(135, 206, 235, 0.14);
+    border-color: rgba(135, 206, 235, 0.5);
+    color: #b6d9ff;
+    box-shadow: 0 0 18px rgba(100, 180, 255, 0.18);
 }
 
 .nav-millaray-cherry {
@@ -1536,8 +1536,8 @@ body {
 .millaray-curtain {
     position: absolute;
     inset: 0;
-    background: #0d1a0e;
-    /* deep meadow dark for the slide itself */
+    background: #0a0f1a;
+    /* deep celeste dark for the slide itself */
     transform: translateY(-100%);
     transition: transform 0.72s cubic-bezier(0.76, 0, 0.24, 1);
     z-index: 1;
@@ -1567,12 +1567,12 @@ body {
     transition: opacity 0.45s ease 0.55s;
     overflow: hidden;
 
-    /* Neutral dark slate — warm dark purple-grey, easy on the eyes */
+    /* Celeste dark slate — cool deep sky blue, easy on the eyes */
     background:
-        radial-gradient(ellipse 70% 50% at 50% 100%, rgba(80, 60, 90, 0.35) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 40% at 15% 80%, rgba(60, 50, 80, 0.25) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 40% at 85% 80%, rgba(60, 50, 80, 0.25) 0%, transparent 60%),
-        linear-gradient(160deg, #0e0e14 0%, #12111a 45%, #16141f 75%, #1a1825 100%);
+        radial-gradient(ellipse 70% 50% at 50% 100%, rgba(40, 80, 130, 0.35) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 15% 80%, rgba(30, 60, 110, 0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 85% 80%, rgba(30, 60, 110, 0.25) 0%, transparent 60%),
+        linear-gradient(160deg, #090e14 0%, #0d1118 45%, #101620 75%, #121a26 100%);
 }
 
 /* ── Message paragraph ─────────────────────────────────── */
@@ -1593,18 +1593,18 @@ body {
 }
 
 .millaray-msg-accent {
-    color: #f9a8d4;
+    color: #a8d8f9;
     font-style: italic;
 }
 
 /* ── Custom Text Selection ──────────────────────────────── */
 .millaray-content ::selection {
-    background: rgba(249, 168, 212, 0.25);
+    background: rgba(100, 180, 255, 0.25);
     color: #ffffff;
 }
 
 .millaray-content ::-moz-selection {
-    background: rgba(249, 168, 212, 0.25);
+    background: rgba(100, 180, 255, 0.25);
     color: #ffffff;
 }
 
@@ -1637,7 +1637,7 @@ body {
     bottom: -100px;
     left: 50%;
     transform: translateX(-50%);
-    background: radial-gradient(circle, rgba(130, 80, 160, 0.2) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(50, 120, 200, 0.22) 0%, transparent 70%);
 }
 
 .ml-glow-2 {
@@ -1645,7 +1645,7 @@ body {
     height: 350px;
     top: 15%;
     left: 8%;
-    background: radial-gradient(circle, rgba(255, 182, 213, 0.08) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(135, 206, 235, 0.09) 0%, transparent 70%);
     animation: glowPulse 5s ease-in-out infinite alternate;
 }
 
@@ -1654,7 +1654,7 @@ body {
     height: 350px;
     top: 15%;
     right: 8%;
-    background: radial-gradient(circle, rgba(255, 182, 213, 0.08) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(135, 206, 235, 0.09) 0%, transparent 70%);
     animation: glowPulse 5s ease-in-out infinite alternate-reverse;
 }
 
@@ -1702,10 +1702,10 @@ body {
 }
 
 .ml-pink {
-    color: #f9a8d4;
+    color: #a8d8f9;
     text-shadow:
-        0 0 50px rgba(249, 168, 212, 0.45),
-        0 0 100px rgba(249, 168, 212, 0.2),
+        0 0 50px rgba(100, 180, 255, 0.5),
+        0 0 100px rgba(100, 180, 255, 0.22),
         0 2px 8px rgba(0, 0, 0, 0.5);
     display: block;
 }
@@ -1755,9 +1755,9 @@ body {
 }
 
 .millaray-close:hover {
-    background: rgba(255, 182, 213, 0.15);
-    border-color: rgba(255, 182, 213, 0.4);
-    color: #ffb6d9;
+    background: rgba(135, 206, 235, 0.15);
+    border-color: rgba(135, 206, 235, 0.4);
+    color: #b6d9ff;
 }
 
 /* ── Music Player Notification ────────────────────────────── */
@@ -1770,8 +1770,8 @@ body {
     align-items: center;
     gap: 1rem;
     padding: 0.85rem 1.25rem;
-    background: rgba(20, 16, 26, 0.65);
-    border: 1px solid rgba(255, 182, 213, 0.15);
+    background: rgba(10, 16, 26, 0.65);
+    border: 1px solid rgba(135, 206, 235, 0.15);
     border-radius: 16px;
     backdrop-filter: blur(12px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -1806,9 +1806,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, rgba(255, 182, 213, 0.2), rgba(255, 105, 180, 0.05));
+    background: linear-gradient(135deg, rgba(135, 206, 235, 0.2), rgba(100, 180, 255, 0.05));
     border-radius: 50%;
-    color: #f9a8d4;
+    color: #a8d8f9;
     flex-shrink: 0;
 }
 
@@ -1902,7 +1902,7 @@ body {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #f9a8d4;
+    background: #a8d8f9;
     cursor: pointer;
     transition: transform 0.1s;
 }
