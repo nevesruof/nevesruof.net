@@ -125,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const cmdInput = document.getElementById('pcCommandInput');
     const autocomplete = document.getElementById('pcAutocomplete');
     const suggestion = document.getElementById('pcSuggestion');
-    const suggestionMillaray = document.getElementById('pcSuggestionMillaray');
     const pcWrap = document.querySelector('.pc-wrap');
 
     if (cmdInput && pcBody) {
@@ -204,13 +203,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 res.innerHTML = `<span class="lp">LLC</span><span class="li">|</span><span class="lx">Best AC; </span><a class="log-link" href="https://discord.gg/vDVjJN79D5" target="_blank" rel="noopener">https://discord.gg/vDVjJN79D5</a><span class="lx"> ( $ Rize )</span>`;
                 pcBody.appendChild(res);
 
-            } else if (cmd.toLowerCase() === '/millaray') {
-                const res = document.createElement('div');
-                res.className = 'pc-line';
-                res.innerHTML = `<span class="lp">LLC</span><span class="li">|</span><span class="lx"> Eres un </span><span class="le">ESTUPIDO</span>`;
-                pcBody.appendChild(res);
-                showMillarayToast();
-
             } else {
                 const res = document.createElement('div');
                 res.className = 'pc-line';
@@ -221,29 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
             pcBody.scrollTop = pcBody.scrollHeight;
         }
 
-        // ── /Millaray toast notification ──────────────────────
-        function showMillarayToast() {
-            const existing = document.getElementById('millaray-toast');
-            if (existing) existing.remove();
-
-            const toast = document.createElement('div');
-            toast.id = 'millaray-toast';
-            toast.innerHTML = `
-                <div class="millaray-toast-icon">💖</div>
-                <div class="millaray-toast-body">
-                    <div class="millaray-toast-title">Para Millaray 🌸</div>
-                    <div class="millaray-toast-msg">Te amo Millaray, perdóname por ser una mierda contigo, te juro que no queria hacerte daño.</div>
-                </div>
-                <button class="millaray-toast-close" onclick="this.parentElement.remove()">✕</button>
-            `;
-            document.body.appendChild(toast);
-
-            // Auto-dismiss after 6 seconds
-            setTimeout(() => {
-                toast.classList.add('millaray-toast-hide');
-                setTimeout(() => toast.remove(), 500);
-            }, 6000);
-        }
     }
 
 });
@@ -254,7 +223,6 @@ document.addEventListener('DOMContentLoaded', () => {
 (function () {
     const hamburger = document.getElementById('navHamburger');
     const mobileMenu = document.getElementById('navMobileMenu');
-    const mobileMillarayBtn = document.getElementById('navMillarayBtnMobile');
 
     if (!hamburger || !mobileMenu) return;
 
@@ -290,14 +258,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close on scroll
     window.addEventListener('scroll', closeMenu, { passive: true });
 
-    // Wire up the mobile Millaray button to open the overlay
-    if (mobileMillarayBtn) {
-        mobileMillarayBtn.addEventListener('click', () => {
-            closeMenu();
-            const mainBtn = document.getElementById('navMillarayBtn');
-            if (mainBtn) mainBtn.click();
-        });
-    }
 })();
 
 /* ══════════════════════════════════════════════════════════
